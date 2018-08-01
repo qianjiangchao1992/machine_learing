@@ -1,0 +1,9 @@
+https://blog.csdn.net/zhuxiaodong030/article/details/54316345  (pandas 常用方法枚举）
+http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/（机器学习算法优缺点比较）
+https://blog.csdn.net/qq_16234613/article/details/64217337（pandas 方法选择）
+https://blog.csdn.net/JasonZhangOO/article/details/73061060 （xgboost的优点）
+https://blog.csdn.net/github_38414650/article/details/76061893 （xgboost的优点）
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml（Python 库 安装网站）
+https://blog.csdn.net/xbmatrix/article/details/62056589(重要面试题）
+https://zhuanlan.zhihu.com/p/29677765(机器学习面试题)
+http://www.cnblogs.com/wdsunny/p/6362044.html(机器学习知识体系)
