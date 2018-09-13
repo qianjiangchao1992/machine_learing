@@ -1,0 +1,91 @@
+样例数据：
+客户ID    故障原因    故障类型    修障时长       满意度
+001    1    5   10.2   1
+002    1    5   12   0
+003   1    5    14   1
+004    2     5    16   0
+005    2    5   18  1
+006    2    6    20   0
+007     3     6   22  1
+008    3    6   23   0
+009     3    6   24    1
+010     3    6   25    0
+
+
+1.ID3算法归纳：
+信息增益的思想来源于信息论的香农定理，ID3算法选择具有最高信息增益的自变量作为当前的树叉（树的分支），以满意度预警模型为例，模型有三个自变量：故障原因、故障类型、修障时长。分别计算三个自变量的信息增益，选取其中最大的信息增益作为树叉。信息增益=原信息需求-要按某个自变量划分所需要的信息。
+
+
+###C4.5算法
+import pandas as pd
+import numpy as np
+data=pd.read_excel(r'C:\Users\Administrator\Desktop\样例数据.xlsx')
+data.columns=['userid','error_reason','error_type','error_time','result']
+def calinfo(data):
+    info_label = 0
+    nums = len(data)
+    for i in list(set(data.values)):
+        p=float(len(data[data==i]))/nums
+        info_label-=p*np.log2(p)
+    return info_label
+#print(info_label)
+def calsan(types):
+    values=list(data[types].values)
+    salinfo=0
+    for i in list(set(values)):
+        data_=data['result'][data[types]==i]
+        data_cal=calinfo(data_)
+        data_i_sal=float(values.count(i))/len(values)
+        salinfo+=data_cal*data_i_sal
+    return salinfo
+#print(calsan('error_reason'))
+infolist={}
+info_label=calinfo(data.result)
+#print(info_label)
+for cols in list(data.columns[1:4]):
+    info_col=round((info_label-calsan(cols)),4)
+    data_cols=len(data[cols])
+    data_unique_value=list(set(data[cols].values))
+    data_values=list(data[cols].values)
+    # if cols=='error_type':
+    #     print(data_values)
+    # else:
+    #     pass
+    value_nums=0
+    for i in data_unique_value:
+        prob=float(data_values.count(i))/data_cols
+        value_nums-=prob*np.log2(prob)
+    #print(cols,value_nums)
+    infolist[cols]=round(info_col/value_nums,4)
+###CART
+#print(data)
+def get_gini(dataset):
+    values=list(dataset['result'].values)
+    nums=len(values)
+    sums=0
+    for i in list(set(dataset['result'].values)):
+        p=float(values.count(i))/nums
+        sums+=p**2
+    gini=1-sums
+    return gini
+for col in list(data.columns[1:4]):
+    values=list(data[col].values)
+    nums=len(values)
+    ginicol={}
+    for i in list(set(values)):
+        data_=data[data[col]==i]
+        #print(type(data_))
+        gini_1=get_gini(data_)*(float(len(data_))/nums)
+        gini_2=get_gini(data[data[col]!=i])*(float(nums-len(data_))/nums)
+        ginicol[(col,i)]=round(gini_1+gini_2,4)
+    print(ginicol)
+
+
+
+
+
+
+
+
+
+
