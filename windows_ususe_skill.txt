@@ -1,0 +1,11 @@
+Windows+M :收起所有窗口
+Windows+L :直接锁屏
+Windows+ ++++:放大镜(放大图片)
+Windows+E :直接打开资源管理器找文件
+Windows+D :直接显示桌面
+
+
+Ctrl+Z:撤销
+Ctrl+C/V:复制粘贴
+Ctrl+W:浏览器关闭当前界面
+Ctrl+Shift+T:浏览器恢复之前关闭的界面
